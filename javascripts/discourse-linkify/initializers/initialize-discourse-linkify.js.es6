@@ -28,14 +28,11 @@ export default {
         }
       });
       
-      let createLink = function(text, url) {
-        var link = document.createElement('a');
-        link.innerHTML = text;
-        link.href = url;
-        link.rel = 'nofollow';
-        link.target = '_blank';
-        link.className = 'linkify-word no-track-link';
-        return link;
+      let replaceText = function(text, newText) {
+        var span = document.createElement('span');
+        span.innerHTML = newText;
+        span.className = 'replaced-word';
+        return span;
       };
 
       let Action = function(inputListName, method) {
@@ -44,8 +41,8 @@ export default {
         this.inputs = {};
       };
   
-      let linkify = new Action('linked_words', createLink);
-      let actions = [linkify];
+      let replace = new Action('linked_words', replaceText);
+      let actions = [replace];
       actions.forEach(readInputList);
         
       api.decorateCooked($elem => {
@@ -54,7 +51,7 @@ export default {
             traverseNodes($elem[0], action, skipTags, skipClasses)
           }
         });
-      }, {'id': 'linkify-words-theme'});
+      }, {'id': 'replace-words-theme'});
     });
   }
 }
