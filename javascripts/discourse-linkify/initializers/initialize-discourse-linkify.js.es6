@@ -2,7 +2,7 @@ import { withPluginApi } from "discourse/lib/plugin-api";
 import { traverseNodes, readInputList} from '../lib/utilities';
 
 export default {
-  name: 'discourse-linkify-initializer',
+  name: 'discourse-replace-initializer',
   initialize(){
     withPluginApi("0.8.7", api => {
 
@@ -41,7 +41,7 @@ export default {
         this.inputs = {};
       };
   
-      let replace = new Action('linked_words', replaceText);
+      let replace = new Action('replaced_words', replaceText);
       let actions = [replace];
       actions.forEach(readInputList);
         
